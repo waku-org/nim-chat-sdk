@@ -20,4 +20,6 @@ make run-go-example
 
 ## TODO
 
-- [  ] Follow closer the integrations from [this repo](https://github.com/logos-co/nim-c-library-guide)
+- [ ] Follow closer the integrations from [this repo](https://github.com/logos-co/nim-c-library-guide)
+- [ ] [Roadmap](https://github.com/waku-org/pm/blob/2025H2/draft-roadmap/create_chat_sdk_mvp.md)
+    - [ ] [FURPS](https://github.com/waku-org/pm/blob/2025H2/FURPS/application/chat_sdk.md)
