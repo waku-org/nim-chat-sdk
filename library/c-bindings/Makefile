@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -fPIC
-NIMFLAGS = --app:lib --threads:on --gc:orc
+NIMFLAGS = --app:lib 
 
 # Directories
 SRC_DIR = ../../src
@@ -20,10 +20,10 @@ shared: $(SHARED_LIB)
 static: $(STATIC_LIB)
 
 $(SHARED_LIB): $(SRC_DIR)/chat_sdk.nim $(HEADER)
-	cd $(SRC_DIR) && nim c $(NIMFLAGS) --out:../bindings/c-bindings/$(SHARED_LIB) chat_sdk.nim
+	cd $(SRC_DIR) && nim c $(NIMFLAGS) --out:../library/c-bindings/$(SHARED_LIB) chat_sdk.nim
 
 $(STATIC_LIB): $(SRC_DIR)/chat_sdk.nim $(HEADER)
-	cd $(SRC_DIR) && nim c $(NIMFLAGS) --app:staticLib --out:../bindings/c-bindings/$(STATIC_LIB) chat_sdk.nim
+	cd $(SRC_DIR) && nim c $(NIMFLAGS) --app:staticLib --out:../library/c-bindings/$(STATIC_LIB) chat_sdk.nim
 
 clean:
 	rm -f $(SHARED_LIB) $(STATIC_LIB) *.o *.so *.a

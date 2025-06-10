@@ -5,7 +5,7 @@ import (
 	"log"
 	"sync"
 
-	chatsdk "github.com/waku-org/nim-chat-sdk/bindings/go-bindings"
+	chatsdk "github.com/waku-org/nim-chat-sdk/library/go-bindings"
 )
 
 // SimpleStore implements the chatsdk.Store interface with in-memory storage

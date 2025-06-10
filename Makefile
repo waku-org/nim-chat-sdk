@@ -20,35 +20,37 @@ help:
 	@echo "  help             - Show this help message"
 
 # Build Nim library
+build-nim: libchatsdk
+
 libchatsdk:
 	@echo "Building Nim library..."
-	cd src && nim c --app:lib --opt:speed --mm:arc --out:../bindings/c-bindings/libchatsdk.so chat_sdk.nim
+	cd chat_sdk && nim c --app:lib --opt:speed --mm:refc --out:../library/c-bindings/libchatsdk.so chat_sdk.nim
 
 # Build C bindings
-build-c: build-nim
+build-c: libchatsdk
 	@echo "C bindings ready (built with Nim)"
 
 # Build Go bindings (just verify they compile)
 build-go: build-c
 	@echo "Building Go bindings..."
-	cd bindings/go-bindings && go build .
+	cd library/go-bindings && go build .
 
 # Run Go example
 run-go-example: build-go
 	@echo "Running Go example..."
 	cd examples/go-app && \
-	LD_LIBRARY_PATH=../../bindings/c-bindings:$$LD_LIBRARY_PATH \
+	LD_LIBRARY_PATH=../../library/c-bindings:$$LD_LIBRARY_PATH \
 	go run main.go
 
 # Clean all build artifacts
 clean:
 	@echo "Cleaning build artifacts..."
-	rm -f bindings/c-bindings/*.so bindings/c-bindings/*.a
-	rm -rf src/nimcache bindings/c-bindings/nimcache
-	cd bindings/go-bindings && go clean
+	rm -f library/c-bindings/*.so library/c-bindings/*.a
+	rm -rf chat_sdk/nimcache library/c-bindings/nimcache
+	cd library/go-bindings && go clean
 	cd examples/go-app && go clean
 
 # Test the Nim library directly
 test-nim:
 	@echo "Testing Nim library directly..."
-	cd src && nim r chat_sdk.nim 
+	cd chat_sdk && nim r chat_sdk.nim 
