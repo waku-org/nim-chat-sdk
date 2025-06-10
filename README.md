@@ -17,3 +17,7 @@ make build-go     # Verify Go bindings compile
 ```bash
 make run-go-example
 ```
+
+## TODO
+
+- [  ] Follow closer the integrations from [this repo](https://github.com/logos-co/nim-c-library-guide)
