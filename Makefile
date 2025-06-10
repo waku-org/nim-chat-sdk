@@ -20,7 +20,7 @@ help:
 	@echo "  help             - Show this help message"
 
 # Build Nim library
-build-nim:
+libchatsdk:
 	@echo "Building Nim library..."
 	cd src && nim c --app:lib --opt:speed --mm:arc --out:../bindings/c-bindings/libchatsdk.so chat_sdk.nim
 
