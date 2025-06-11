@@ -10,3 +10,9 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 2.0.0"
+
+task buildSharedLib, "Build shared library for C bindings":
+  exec "nim c --app:lib --out:../library/c-bindings/libchatsdk.so chat_sdk/chat_sdk.nim"
+
+task buildStaticLib, "Build static library for C bindings":
+  exec "nim c --app:staticLib --out:../library/c-bindings/libchatsdk.a chat_sdk/chat_sdk.nim" 

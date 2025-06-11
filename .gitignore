@@ -1,0 +1,13 @@
+# Nim
+nimcache/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build artifacts
+*.o
+*.a
+
+# OS
+.DS_Store 
