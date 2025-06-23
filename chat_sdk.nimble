@@ -7,9 +7,12 @@ license       = "MIT"
 srcDir        = "src"
 
 
-# Dependencies
 
-requires "nim >= 2.0.0"
+### Dependencies
+requires "nim >= 2.2.4",
+  "chronicles",
+  "chronos",
+  "db_connector"
 
 task buildSharedLib, "Build shared library for C bindings":
   exec "nim c --app:lib --out:../library/c-bindings/libchatsdk.so chat_sdk/chat_sdk.nim"
