@@ -3,9 +3,9 @@ import chronos
 
 type
   MessagePriority* = enum
-    Optional = 0
+    Critical = 0
     Normal = 1
-    Critical = 2
+    Optional = 2
 
   QueuedMessage*[T] = object
     messageId*: string
