@@ -13,6 +13,7 @@ requires "nim >= 2.0.0"
 requires "leopard >= 0.1.0 & < 0.2.0"
 requires "nimcrypto >= 0.6.3"
 requires "results"
+requires "chronicles"
 
 
 task demo, "Run demo":

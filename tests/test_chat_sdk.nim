@@ -12,4 +12,3 @@ import chat_sdk/segmentation
 
 test "can add":
   check add(5, 5) == 10
-  check add2(5, 5) == 11

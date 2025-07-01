@@ -20,17 +20,17 @@ type
 
 # Placeholder types (unchanged)
 type
-  WakuNewMessage = object
-    payload: seq[byte]
+  WakuNewMessage* = object
+    payload*: seq[byte]
     # Add other fields as needed
 
-  StatusMessage = object
-    transportLayer: TransportLayer
+  StatusMessage* = object
+    transportLayer*: TransportLayer
 
-  TransportLayer = object
-    hash: seq[byte]
-    payload: seq[byte]
-    sigPubKey: seq[byte]
+  TransportLayer* = object
+    hash*: seq[byte]
+    payload*: seq[byte]
+    sigPubKey*: seq[byte]
 
   Persistence = object
     completedMessages: Table[seq[byte], bool]  # Mock storage for completed message hashes
@@ -60,13 +60,13 @@ proc isParityMessage*(s: SegmentMessage): bool =
 # MessageSender type (unchanged)
 type
   MessageSender* = ref object
-    messaging: Messaging
-    persistence: Persistence
+    messaging*: Messaging
+    persistence*: Persistence
 
-  Messaging = object
-    maxMessageSize: int
+  Messaging* = object
+    maxMessageSize*: int
 
-proc initPersistence(): Persistence =
+proc initPersistence*(): Persistence =
   Persistence(
     completedMessages: initTable[seq[byte], bool](),
     segments: initTable[(seq[byte], seq[byte]), seq[SegmentMessage]]()
@@ -97,10 +97,18 @@ proc replicateMessageWithNewPayload(message: WakuNewMessage, payload: seq[byte])
   return ok(copiedMessage)
 
 proc protoMarshal(msg: SegmentMessage): Result[seq[byte], string] =
-  return err("protoMarshal not implemented")
+  # Fake serialization (index + payload length) TODO
+  return ok(@[byte(msg.index)] & msg.payload)
 
 proc protoUnmarshal(data: seq[byte], msg: var SegmentMessage): Result[void, string] =
-  return err("protoUnmarshal not implemented")
+  # Fake deserialization (reconstruct index and payload)
+  if data.len < 1:
+    return err("data too short")
+  msg.index = uint32(data[0])
+  msg.payload = data[1..^1]
+  msg.segmentsCount = 2
+  msg.entireMessageHash = @[byte 1, 2, 3]  # Dummy hash
+  return ok()
 
 # Segment message into smaller chunks (updated with nim-leopard)
 proc segmentMessageInternal(newMessage: WakuNewMessage, segmentSize: int): Result[seq[WakuNewMessage], string] =
