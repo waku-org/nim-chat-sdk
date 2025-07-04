@@ -16,3 +16,6 @@ task buildSharedLib, "Build shared library for C bindings":
 
 task buildStaticLib, "Build static library for C bindings":
   exec "nim c --app:staticLib --out:../library/c-bindings/libchatsdk.a chat_sdk/chat_sdk.nim" 
+
+task migrate, "Run database migrations":
+  exec "nim c -r chat_sdk/migration.nim"

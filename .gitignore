@@ -10,4 +10,11 @@ nimcache/
 *.a
 
 # OS
-.DS_Store 
+.DS_Store
+
+# Temporary files
+*.db
+
+# Compiled files
+chat_sdk/*
+!*.nim
